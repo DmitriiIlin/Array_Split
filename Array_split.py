@@ -1,6 +1,6 @@
 def ArrayChunk(array):
 #Метод сортирует массив на вокруг опорного элемента
-    if len(a)==0:
+    if len(array)==0:
         return None
     else:
         while len(array)>0:
@@ -20,7 +20,7 @@ def ArrayChunk(array):
                     return middle
                 array[start], array[finish]=array[finish], array[start]
             
- """           
+"""           
 a=[1,23]
 print(ArrayChunk(a))
 """
