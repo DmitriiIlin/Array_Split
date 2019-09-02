@@ -23,13 +23,13 @@ def ArrayChunk(array):
                 if start==(finish-1) and array[start]>array[finish]:
                     array[start],array[finish]=array[finish],array[start]
                     break
-                if start==finish or (start==(finish-1) and array[start]>array[finish]):
+                if start==finish or (start==(finish-1)) and array[start]>array[finish]:
                     #print(array)
                     return middle
                 array[start], array[finish]=array[finish], array[start]
                 #print(array)
             
-"""          
+"""       
 a=[7,5,6,4,3,1,2]
 print(ArrayChunk(a))
 """
