@@ -5,6 +5,7 @@ def ArrayChunk(array):
     else:
         while len(array)>0:
             middle=len(array)//2
+            middle_value=array[middle]
             start=0
             finish=len(array)-1
             while len(array)>0:
@@ -23,13 +24,14 @@ def ArrayChunk(array):
                 if start==(finish-1) and array[start]>array[finish]:
                     array[start],array[finish]=array[finish],array[start]
                     break
-                if start==finish or (start==(finish-1)) and array[start]>array[finish]:
-                    #print(array)
-                    return middle
+                if start==finish or (start==(finish-1) and array[start]>array[finish]):
+                    for imiddle in range(0,len(array)):
+                        if array[imiddle]==middle_value:
+                            return imiddle
                 array[start], array[finish]=array[finish], array[start]
                 #print(array)
             
 """       
-a=[7,5,6,4,3,1,2]
+a=[1,3,4,6,5,2,8]
 print(ArrayChunk(a))
 """
