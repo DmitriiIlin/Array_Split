@@ -30,8 +30,71 @@ def ArrayChunk(array):
                             return imiddle
                 array[start], array[finish]=array[finish], array[start]
                 #print(array)
-            
-"""       
-a=[1,3,4,6,5,2,8]
-print(ArrayChunk(a))
+
+def ArrayChunk_2(array):
+    left=0
+    right=len(array)-1
+    middle=len(array)//2
+    middle_value=array[middle]
+    i=left-1
+    j=right+1
+    while True:
+        i+=1
+        while array[i]<middle_value:
+            i+=1
+        j-=1
+        while array[j]>middle_value:
+            j-=1
+        if i>=j:
+            #print(array)
+            return j
+
+def Bounds_Checking(array,left,right):
+    #Проверка индексов
+    if (type(array) is list) and (type(left) is int) and (type(right) is int):
+        q_ty=len(array)
+        if left>=0 and right<=q_ty-1 and right>left:
+            return True
+        else:
+            return False
+    return False
+ 
+def Array_Limitation(array,left,right):
+    #Ф-ция определяющая массив для работы
+    result=[]
+    for i in range(left,right+1):
+        result.append(array[i])
+    return result
+
+def Array_Division(array):
+    #Сортировка
+    middle=ArrayChunk(array)
+    if len(array)<=1:
+        return array
+    else:
+        left_part=Array_Limitation(array,0,middle-1)
+        right_part=Array_Limitation(array,middle,len(array)-1)
+        return Array_Division(left_part)+Array_Division(right_part)
+
+def QuickSort(array,left,right):
+    #Головная функция 
+    Res=Bounds_Checking(array,left,right)
+    if Res!=True:
+        return False
+    else:
+        diff_left=left-0
+        left_part=[]
+        right_part=[]
+        sort_part=[]
+        for i in range(0,diff_left):
+            left_part.append(array[i])
+        if right<len(array)-1:
+            for j in range(right+1,len(array)):
+                right_part.append(array[j])
+        sort_part=Array_Limitation(array,left,right)
+        sort_part=Array_Division(sort_part)
+        return left_part+sort_part+right_part
+"""
+a=[67,78,3,4,6,5,2]
+print(QuickSort(a,1,6))
 """
