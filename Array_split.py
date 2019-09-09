@@ -77,7 +77,8 @@ def Array_Division(array):
         return Array_Division(left_part)+Array_Division(right_part)
 
 def QuickSort(array,left,right):
-    #Головная функция 
+    #Головная функция
+    out=array 
     Res=Bounds_Checking(array,left,right)
     if Res!=True:
         return False
@@ -93,8 +94,15 @@ def QuickSort(array,left,right):
                 right_part.append(array[j])
         sort_part=Array_Limitation(array,left,right)
         sort_part=Array_Division(sort_part)
-        return left_part+sort_part+right_part
+        array=left_part+sort_part+right_part
+        out.clear()
+        for all_index in range(0,len(array)):
+            out.append(array[all_index])
+        return out
 """
 a=[67,78,3,4,6,5,2]
-print(QuickSort(a,1,6))
+print(QuickSort(a,0,6))
+print(a)
+#ArrayChunk(a)
+print(a)
 """
