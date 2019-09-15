@@ -66,15 +66,34 @@ def Array_Limitation(array,left,right):
         result.append(array[i])
     return result
 
+def Array_Parts(array,left,right):
+    # Возвращает левую, центральную и правую части массива-до элемента left левая часть после элемента right правая, между средняя
+    left_part=[]
+    right_part=[]
+    middle_part=[]
+    res=[]
+    size=len(array)
+    if Bounds_Checking(array,left,right)==True:
+        for i in range(0,left):
+            left_part.append(array[i])
+        for l in range(left,right+1):
+            middle_part.append(array[l])    
+        for j in range(right+1,size):
+            right_part.append(array[j])
+        res.append(left_part)
+        res.append(middle_part)
+        res.append(right_part)
+        return res
+    else:
+        return False
+
 def Array_Division(array):
     #Сортировка
     middle=ArrayChunk(array)
     if len(array)<=1:
         return array
     else:
-        left_part=Array_Limitation(array,0,middle-1)
-        right_part=Array_Limitation(array,middle,len(array)-1)
-        return Array_Division(left_part)+Array_Division(right_part)
+        return Array_Division(Array_Limitation(array,0,middle-1))+Array_Division(Array_Limitation(array,middle,len(array)-1))
 
 def QuickSort(array,left,right):
     #Головная функция
@@ -99,10 +118,33 @@ def QuickSort(array,left,right):
         for all_index in range(0,len(array)):
             out.append(array[all_index])
         return out
+
+
+def Array_Partitions(array,low,high):
+    i=low-1
+    pivot=array[high]
+    for j in range(low,high):
+        if array[j]<pivot:
+            i+=1
+            array[i],array[j]=array[j],array[i]
+    array[i+1],array[high]=array[high],array[i+1]
+    return (i+1)
+
+def QuickSortTailOptimization(array,left,right):
+    while (left<right):
+        pivot=Array_Partitions(array,left,right)
+        if (pivot-left)<(right-pivot):
+            QuickSortTailOptimization(array,pivot+1,right)
+            left=pivot+1
+        else:
+            QuickSortTailOptimization(array,pivot+1,right)
+            right=pivot-1 
+
+       
 """
-a=[67,78,3,4,6,5,2]
-print(QuickSort(a,0,6))
-print(a)
-#ArrayChunk(a)
-print(a)
+
+b=[23,4,567,3,78,90,6785]
+a=[67,78,3,444,6,5,255]
+QuickSortTailOptimization(b,0,6)
+print(b)
 """
